@@ -1,0 +1,22 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">EventViz</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="{{ 'active' if page == 'home' else '' }}">
+                        <a href="{{ url_for('main.index') }}">Home</a>
+                    </li>
+                    <li class="{{ 'active' if page == 'timeline' else '' }}">
+                        <a href="{{ url_for('main.timeline') }}">Timeline</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

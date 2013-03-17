@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>{% block title -%}EventViz - {{ page|title }}{%- endblock %}</title>
+    <!-- CSS -->
+    {% block css -%}
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap-responsive.min.css") }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/eventviz.css") }}"/>
+    {%- endblock %}
+    <!-- END CSS -->
+</head>
+<body>
+{% include 'header.html' %}
+<div class="container">
+    {% block body -%}{%- endblock %}
+</div>
+<!-- Javascript -->
+{% block javascript -%}
+    <script type="text/javascript" src="{{ url_for('static', filename="js/jquery-1.9.1.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/bootstrap.min.js") }}"></script>
+{%- endblock %}
+<!-- END Javascript -->
+</body>
+</html>
