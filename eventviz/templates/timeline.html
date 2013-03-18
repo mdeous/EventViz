@@ -1,34 +1,14 @@
 {% extends 'base.html' %}
-
-{% block css -%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/timeline.css") }}"/>
-{%- endblock %}
-
 {% block body -%}
     <div class="row">
         <div class="span12">
-            <div id="timeline"></div>
+            <ul class="nav nav-pills nav-stacked">
+                {% for project in stats %}
+                    <li><a href="{{ url_for('main.project_timeline', project=project) }}">
+                        {{ project|replace('_',' ')|title }} - {{ stats[project] }} events
+                    </a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-{%- endblock %}
-
-{% block javascript -%}
-    {{ super() }}
-    <script type="text/javascript" src="{{ url_for('static', filename="js/timeline-min.js") }}"></script>
-    <script type="text/javascript">
-        function drawVisualization() {
-            var data = {{ data|tojson|safe }};
-            data.forEach(function(item, index) {
-                item['start'] = new Date(Date.parse(item['start']));
-            });
-            var options = {
-                "cluster": true,
-                "groupsChangeable": false
-            };
-            var timeline = new links.Timeline(document.getElementById('timeline'));
-            timeline.draw(data , options);
-        }
-        drawVisualization();
-    </script>
 {%- endblock %}

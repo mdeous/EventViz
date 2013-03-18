@@ -2,3 +2,13 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
+ul.nav-pills>li {
+    background: #e8f6ff;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+}
+ul.nav-pills>li:hover {
+    text-decoration: underline;
+}

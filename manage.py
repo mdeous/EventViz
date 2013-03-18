@@ -17,10 +17,11 @@ class LoadData(Command):
     """
     option_list = (
         Option('-f', '--filename', dest='filename', required=True),
-        Option('-p', '--parser', dest='parser_name', required=True)
+        Option('-p', '--parser', dest='parser_name', required=True),
+        Option('-P', '--project', dest='project_name', required=True)
     )
 
-    def run(self, filename, parser_name):
+    def run(self, filename, parser_name, project_name):
         parser_cls = get_parser_by_name(parser_name)
         if parser_cls is None:
             print "Unknown parser: %s" % parser_name
@@ -31,7 +32,7 @@ class LoadData(Command):
         parser = parser_cls(filename)
         count = 0
         for item in parser.items:
-            if insert_item(parser, item):
+            if insert_item(project_name, parser_name, item):
                 count += 1
             if count % 100 == 0:
                 msg = "Inserted %d events..." % count

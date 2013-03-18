@@ -10,7 +10,6 @@ SESSION_COOKIE_SECURE = True
 # Database settings
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-MONGO_DB = 'test_project'
 
 try:
     from prod_settings import *
