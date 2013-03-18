@@ -1,1 +1,18 @@
 {% extends 'base.html' %}
+{% block body %}
+<div class="hero-unit">
+<h1>EventViz</h1>
+<br>
+<ul>
+    <li>Available projects: <small>{{ stats|length-1 }}</small></li>
+    <ul>
+    {% for project in stats %}
+        {% if project != '__total_events' %}
+            <li>{{ project|title|replace('_', ' ') }}: <small>{{ stats[project] }} events</small></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <li>Total: <small>{{ stats.__total_events }} events</small></li>
+</ul>
+</div>
+{% endblock %}
