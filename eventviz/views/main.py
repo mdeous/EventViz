@@ -46,7 +46,7 @@ def project_timeline(project):
             item = {
                 'start': db_item['time'].strftime('%a, %d %b %Y %H:%M:%S'),
                 'group': event_type,
-                'content': ' - '.join(map(lambda f: db_item.get(f), displayed_fields))
+                'content': ' - '.join(map(lambda f: db_item.get(f, ' '), displayed_fields))
             }
             data.append(item)
     return render_template(
