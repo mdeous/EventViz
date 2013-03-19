@@ -42,7 +42,6 @@ def project_timeline(project):
     for event_type in event_types:
         fixed_fields.update(get_parser_by_name(event_type).fixed_fields)
         for db_item in db[event_type].find():
-            print db_item
             item = {
                 'start': db_item['time'].strftime('%a, %d %b %Y %H:%M:%S'),
                 'group': event_type,
