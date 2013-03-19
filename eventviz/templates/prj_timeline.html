@@ -8,6 +8,21 @@
 {% block body -%}
     <div class="row">
         <div class="span12">
+            <form class="form-inline" action="{{ url_for('main.project_timeline', project=project) }}" method="POST">
+                <fieldset>
+                    <label for="show-fields">Displayed fields</label>
+                    <select name="fields" id="show-fields" multiple="multiple">
+                        {% for field in event_fields %}
+                            <option value="{{ field }}">{{ field }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-small">Update View</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
             <div id="timeline"></div>
         </div>
     </div>
@@ -24,7 +39,8 @@
             });
             var options = {
                 "cluster": true,
-                "groupsChangeable": false
+                "groupsChangeable": false,
+                "showNavigation": true
             };
             var timeline = new links.Timeline(document.getElementById('timeline'));
             timeline.draw(data , options);
