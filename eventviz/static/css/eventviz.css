@@ -16,6 +16,3 @@ ul.nav-pills>li {
     font-weight: bold;
     font-size: 120%;
 }
-ul.nav-pills>li:hover {
-    text-decoration: underline;
-}

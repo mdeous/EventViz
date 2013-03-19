@@ -24,6 +24,7 @@ def get_projects_stats():
         stats[project] = total_events
     return stats
 
+
 def insert_item(db, parser, data):
     if db not in get_database_names():
         raise ValueError("No such database: %s" % db)
