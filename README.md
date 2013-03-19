@@ -1,3 +1,3 @@
 # EventViz
 
-A web application to display log events in a pretty timeline.
+A web application to display log (or whatever parsable source) events in a timeline.
