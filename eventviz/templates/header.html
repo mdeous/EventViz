@@ -15,6 +15,9 @@
                     <li class="{{ 'active' if page == 'timeline' else '' }}">
                         <a href="{{ url_for('timeline.index') }}"><i class="icon-eye-open"></i> Timeline</a>
                     </li>
+                    <li class="{{ 'active' if page == 'search' else '' }}">
+                        <a href="{{ url_for('search.index') }}"><i class="icon-search"></i> Search</a>
+                    </li>
                 </ul>
             </div>
         </div>
