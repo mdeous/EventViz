@@ -26,9 +26,9 @@ def get_projects_stats():
 
 
 def insert_item(db, parser, data):
-    if db not in get_database_names():
-        raise ValueError("No such database: %s" % db)
-    collection = connection[db]
+    if db == 'local':
+        raise ValueError("Can't insert data into 'local' database")
+    collection = connection[db][parser.name]
     for index in parser.base_indexes:
         collection.ensure_index([(index[0], pymongo.ASCENDING)], unique=index[1], drop_dups=index[1])
     for index in parser.extra_indexes:

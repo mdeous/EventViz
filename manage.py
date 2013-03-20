@@ -7,7 +7,7 @@ import sys
 from flask.ext.script import Manager, Command, Option
 
 from eventviz.app import app
-from eventviz.db import insert_item
+from eventviz.db import insert_item, connection, get_database_names
 from eventviz.lib.parsers import get_parser_by_name, get_parser_names
 
 
@@ -32,7 +32,7 @@ class LoadData(Command):
         parser = parser_cls(filename)
         count = 0
         for item in parser.items:
-            if insert_item(project_name, parser_name, item):
+            if insert_item(project_name, parser, item):
                 count += 1
             if count % 100 == 0:
                 msg = "Inserted %d events..." % count
@@ -52,7 +52,24 @@ class ListParsers(Command):
             print '*', parser_name
 
 
+class DropDB(Command):
+    """
+    Drops database for given project.
+    """
+    option_list = (
+        Option('-p', '--project', dest='project', required=True),
+    )
+
+    def run(self, project):
+        if not project in get_database_names():
+            print "No such project: %s" % project
+            return
+        connection.drop_database(project)
+        print "Dropped '%s' project" % project
+
+
 manager = Manager(app)
 manager.add_command('load_data', LoadData())
 manager.add_command('list_parsers', ListParsers())
+manager.add_command('drop_db', DropDB())
 manager.run()
