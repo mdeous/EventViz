@@ -4,7 +4,7 @@
         <div class="span12">
             <ul class="nav nav-pills nav-stacked">
                 {% for project in stats %}
-                    <li><a href="{{ url_for('main.project_timeline', project=project) }}">
+                    <li><a href="{{ url_for('timeline.project', project=project) }}">
                         {{ project|title|replace('_',' ') }}: <small>{{ stats[project] }} events</small>
                     </a></li>
                 {% endfor %}

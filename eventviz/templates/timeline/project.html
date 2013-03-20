@@ -8,7 +8,7 @@
 {% block body -%}
     <div class="row">
         <div class="span12">
-            <form class="form-inline" action="{{ url_for('main.project_timeline', project=project) }}" method="POST">
+            <form class="form-inline" action="{{ url_for('timeline.project', project=project) }}" method="POST">
                 <fieldset>
                     <label for="show-fields">Change displayed fields</label>
                     <select name="fields" id="show-fields" multiple="multiple">
