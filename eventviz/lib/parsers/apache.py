@@ -34,8 +34,9 @@ class ApacheAccessParser(Parser):
             r'$'
         ),
     ]
-    fixed_fields = [
-        'source_ip', 'remote_logname', 'remote_user', 'time', 'method', 'querystring', 'protocol', 'status', 'resp_size'
+    fieldnames = [
+        'source_ip', 'remote_logname', 'remote_user', 'time', 'method', 'querystring', 'protocol', 'status',
+        'resp_size', 'referrer', 'user_agent', 'process_time', 'session_id'
     ]
 
     def normalize(self, data):

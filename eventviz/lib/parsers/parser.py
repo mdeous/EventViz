@@ -14,7 +14,7 @@ class Parser(object):
     ]
     extra_indexes = []
     regexes = []
-    fixed_fieldnames = []
+    fieldnames = []
 
     def __init__(self, filename):
         self.filename = filename
