@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 
-
 import pymongo
 from pymongo.errors import DuplicateKeyError
 
 from eventviz import settings
 from eventviz.lib.parsers import get_parser_by_name
+from eventviz.lib.utils import cache
 
 
 connection = pymongo.MongoClient(settings.MONGO_HOST, settings.MONGO_PORT)
 
 
+@cache()
 def get_database_names():
     dbs = connection.database_names()
     dbs.remove('local')
     return dbs
 
 
+@cache()
 def get_event_types(db_name):
     db = connection[db_name]
     event_types = db.collection_names()
@@ -24,6 +26,7 @@ def get_event_types(db_name):
     return event_types
 
 
+@cache()
 def get_projects_stats():
     stats = {}
     for project in get_database_names():
@@ -33,6 +36,7 @@ def get_projects_stats():
     return stats
 
 
+@cache()
 def get_fieldnames(db_name):
     fieldnames = set()
     db = connection[db_name]
