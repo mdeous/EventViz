@@ -47,6 +47,13 @@ def get_fieldnames(db_name):
     return fieldnames
 
 
+@cache()
+def get_exact_matches(db_name, coll_name, fieldname, value):
+    db = connection[db_name]
+    coll = db[coll_name]
+    return list(coll.find({fieldname: value}, fields={'_id': False}))
+
+
 def insert_item(db_name, parser, data):
     if db_name == 'local':
         raise ValueError("Can't insert data into 'local' database")

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block css -%}
+    {{ super() }}
+    <style type="text/css">
+    div.search-form {
+        text-align: center;
+    }
+    </style>
+{%- endblock %}
+
+{% block body -%}
+    <div class="row">
+        <div class="span12 search-form">
+            <form class="form-inline form-search" action="{{ url_for('search.project', project=project) }}" method="POST">
+                <fieldset>
+                    <label for="search-etype"></label>
+                    <select name="search-etype" id="search-etype">
+                        {% for event_type in event_types %}
+                            <option value="{{ event_type }}">{{ event_type }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="search-field"></label>
+                    <select name="search-field" id="search-field">
+                        {% for field in fields %}
+                            <option value="{{ field }}">{{ field }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="search-type"></label>
+                    <select name="search-type" id="search-type">
+                        <option value="equal">equals</option>
+{#                        <option value="contains">contains</option>#}
+                    </select>
+
+                    <br><br>
+                    <label for="query"></label>
+                    <input type="text" name="query" id="query" placeholder="Search Query" class="span10 search-query" />
+                    <br><br>
+                    <button class="btn btn-primary btn-medium" type="submit">Search!</button>
+                </fieldset>
+            </form>
+            <hr>
+        </div>
+    </div>
+    {% if results %}
+    <div class="row">
+        <div class="span12 search-results">
+            <table class="table table-stripped table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                    {% for result_field in result_fields %}
+                        <th>{{ result_field }}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            {% for result_field in result_fields %}
+                                <td>{{ result[result_field] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+{%- endblock %}

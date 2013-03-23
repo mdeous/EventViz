@@ -1,28 +1,14 @@
 {% extends 'base.html' %}
-{% block css %}
-    {{ super() }}
-    <style type="text/css">
-    form.form-search {
-        text-align: center;
-    }
-    </style>
-{% endblock %}
-
-{% block body %}
+{% block body -%}
     <div class="row">
-            <form class="form-search" action="{{ url_for('search.index') }}">
-                <div class="input-append">
-                    <input type="text" class="span10 search-query input-large" />
-                    <button class="btn" type="submit">Search</button>
-                </div><br /><br />
-                <fieldset>
-                    <label for="field">Search in</label>
-                    <select name="field" id="field">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </fieldset>
-            </form>
-            <hr>
+        <div class="span12">
+            <ul class="nav nav-pills nav-stacked">
+                {% for project in stats %}
+                    <li><a href="{{ url_for('search.project', project=project) }}">
+                        {{ project|title|replace('_',' ') }}: <small>{{ stats[project] }} events</small>
+                    </a></li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-{% endblock %}
+{%- endblock %}
