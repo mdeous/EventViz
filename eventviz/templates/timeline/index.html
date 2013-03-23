@@ -4,9 +4,11 @@
         <div class="span12">
             <ul class="nav nav-pills nav-stacked">
                 {% for project in stats %}
-                    <li><a href="{{ url_for('timeline.project', project=project) }}">
-                        {{ project|title|replace('_',' ') }}: <small>{{ stats[project] }} events</small>
-                    </a></li>
+                    {% if project != 'total_events' %}
+                        <li><a href="{{ url_for('timeline.project', project=project) }}">
+                            {{ project|title|replace('_',' ') }}: <small>{{ stats[project] }} events</small>
+                        </a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
