@@ -11,6 +11,9 @@ SESSION_COOKIE_SECURE = True
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
 
+# EventViz settings
+JS_DATE_FORMAT = '%a, %d %b %Y %H:%M:%S'
+
 try:
     from prod_settings import *
 except ImportError:

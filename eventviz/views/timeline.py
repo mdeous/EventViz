@@ -2,6 +2,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for, request
 
+from eventviz import settings
 from eventviz.db import get_database_names, connection, get_projects_stats, get_fieldnames, get_event_types
 
 timeline = Blueprint('timeline', __name__)
@@ -34,7 +35,7 @@ def project(project):
     for event_type in get_event_types(project):
         for db_item in db[event_type].find():
             item = {
-                'start': db_item['time'].strftime('%a, %d %b %Y %H:%M:%S'),
+                'start': db_item['time'].strftime(settings.JS_DATE_FORMAT),
                 'group': db_item.get(group, 'N/A') if group is not None else event_type,
                 'content': ' - '.join(map(lambda f: str(db_item.get(f, 'N/A')), displayed_fields))
             }
