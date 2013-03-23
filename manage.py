@@ -6,6 +6,7 @@ import sys
 
 from flask.ext.script import Manager, Command, Option
 
+from eventviz import settings
 from eventviz.app import app
 from eventviz.db import insert_item, connection, get_database_names
 from eventviz.lib.parsers import get_parser_by_name, get_parser_names
@@ -32,8 +33,11 @@ class LoadData(Command):
         parser = parser_cls(filename)
         count = 0
         for item in parser.items:
-            if insert_item(project_name, parser, item):
+            if settings.DEBUG:
                 count += 1
+            else:
+                if insert_item(project_name, parser, item):
+                    count += 1
             if count % 100 == 0:
                 msg = "Inserted %d events..." % count
                 sys.stdout.write(msg)
