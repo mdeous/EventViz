@@ -35,9 +35,8 @@ class Parser(object):
                         data['raw_log'] = line
                         yield data
                         break
-                    else:
-                        if settings.DEBUG:
-                            print "FAILED:", line
+                if settings.DEBUG and (match is None):
+                    print'FAILED: %s' % line
 
     def pre_parse(self, line):
         return line
