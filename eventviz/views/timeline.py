@@ -35,7 +35,7 @@ def project(project):
         for db_item in db[event_type].find():
             item = {
                 'start': db_item['time'].strftime('%a, %d %b %Y %H:%M:%S'),
-                'group': db_item.get(group, 'N/A') or event_type,
+                'group': db_item.get(group, 'N/A') if group is not None else event_type,
                 'content': ' - '.join(map(lambda f: str(db_item.get(f, 'N/A')), displayed_fields))
             }
             data.append(item)
