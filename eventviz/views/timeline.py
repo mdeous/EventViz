@@ -2,8 +2,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for, request
 
-from eventviz.db import get_database_names, connection, get_projects_stats
-from eventviz.lib.parsers import get_parser_by_name
+from eventviz.db import get_database_names, connection, get_projects_stats, get_fieldnames, get_event_types
 
 timeline = Blueprint('timeline', __name__)
 
@@ -22,9 +21,7 @@ def project(project):
         # TODO: send flash message
         return redirect(url_for('timeline.index'))
     db = connection[project]
-    event_types = db.collection_names()
-    event_types.remove('system.indexes')
-    available_fields = set()
+    available_fields = get_fieldnames(project)
     displayed_fields = ['method', 'querystring']
     group = None
     if request.method == 'POST':
@@ -34,13 +31,12 @@ def project(project):
         if 'group' in request.form:
             group = request.form['group']
     data = []
-    for event_type in event_types:
-        available_fields.update(get_parser_by_name(event_type).fieldnames)
+    for event_type in get_event_types(project):
         for db_item in db[event_type].find():
             item = {
                 'start': db_item['time'].strftime('%a, %d %b %Y %H:%M:%S'),
-                'group': db_item.get(group) or event_type,
-                'content': ' - '.join(map(lambda f: db_item.get(f, ''), displayed_fields))
+                'group': db_item.get(group, 'N/A') or event_type,
+                'content': ' - '.join(map(lambda f: str(db_item.get(f, 'N/A')), displayed_fields))
             }
             data.append(item)
     return render_template(
