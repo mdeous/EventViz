@@ -26,6 +26,7 @@ class Parser(object):
                 line = line.strip()
                 if not line:
                     continue
+                line = self.pre_parse(line)
                 for regex in self.regexes:
                     match = regex.match(line)
                     if match is not None:
@@ -37,6 +38,9 @@ class Parser(object):
                     else:
                         if settings.DEBUG:
                             print "FAILED:", line
+
+    def pre_parse(self, line):
+        return line
 
     def normalize(self, data):
         return data
