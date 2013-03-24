@@ -13,7 +13,7 @@ MONGO_PORT = 27017
 
 # EventViz settings
 JS_DATE_FORMAT = '%a, %d %b %Y %H:%M:%S'
-DEBUG_PARSERS = DEBUG
+DEBUG_PARSERS = False
 
 try:
     from prod_settings import *
