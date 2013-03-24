@@ -32,8 +32,8 @@ class LoadData(Command):
             return
         parser = parser_cls(filename)
         count = 0
-        for item in parser.items:
-            if settings.DEBUG:
+        for item in parser.run():
+            if settings.DEBUG_PARSERS:
                 count += 1
             else:
                 if insert_item(project_name, parser, item):
