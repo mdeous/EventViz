@@ -93,9 +93,20 @@ class DropCollection(Command):
         print "Dropped data for '%s' in project '%s'" % (parser, project)
 
 
+class ListProjects(Command):
+    """
+    Lists available projects.
+    """
+    def run(self):
+        print "Available projects:"
+        for db_name in get_database_names():
+            print '*', db_name
+
+
 manager = Manager(app)
 manager.add_command('load_data', LoadData())
 manager.add_command('list_parsers', ListParsers())
 manager.add_command('drop_db', DropDB())
 manager.add_command('drop_collection', DropCollection())
+manager.add_command('list_projects', ListProjects())
 manager.run()
