@@ -50,7 +50,7 @@ For the remaining configuration variables, just look at the `settings.py` file, 
 ### Deployment
 
 To serve the application using something else than the integrated server (Apache, nginx, ...), please refer to
-the related [Flask configuration](http://flask.pocoo.org/docs/deploying/)
+the related [Flask documentation](http://flask.pocoo.org/docs/deploying/).
 
 ## Documentation
 
