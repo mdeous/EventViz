@@ -41,4 +41,5 @@ class ApacheAccessParser(Parser):
 
     def normalize(self, data):
         data['time'] = data['time'][:-6]
+        data = super(ApacheAccessParser, self).normalize(data)
         return data
