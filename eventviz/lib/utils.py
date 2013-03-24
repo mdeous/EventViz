@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from copy import copy
 from functools import wraps
 from time import time
 
@@ -17,10 +18,10 @@ class cache(object):
         def wrapper(*args, **kwargs):
             if (args == self.last_args) and (kwargs == self.last_kwargs):
                 if (self.last_call_time is not None) and (time()-self.last_call_time < self.timeout):
-                    return self.last_retval
+                    return copy(self.last_retval)
             self.last_call_time = time()
             self.last_args = args
             self.last_kwargs = kwargs
             self.last_retval = func(*args, **kwargs)
-            return self.last_retval
+            return copy(self.last_retval)
         return wrapper
