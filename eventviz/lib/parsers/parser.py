@@ -9,8 +9,7 @@ class Parser(object):
     name = None
     time_fmt = ''
     base_indexes = [
-        ('time', False),
-        ('raw_log', True)
+        ('raw_log', True),
     ]
     extra_indexes = []
     regexes = []
