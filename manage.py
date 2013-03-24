@@ -61,19 +61,41 @@ class DropDB(Command):
     Drops database for given project.
     """
     option_list = (
-        Option('-p', '--project', dest='project', required=True),
+        Option('-P', '--project', dest='project', required=True),
     )
 
     def run(self, project):
-        if not project in get_database_names():
+        if project not in get_database_names():
             print "No such project: %s" % project
             return
         connection.drop_database(project)
         print "Dropped '%s' project" % project
 
 
+class DropCollection(Command):
+    """
+    Drops a project's data for given parser.
+    """
+    option_list = (
+        Option('-P', '--project', dest='project', required=True),
+        Option('-p', '--parser', dest='parser', required=True)
+    )
+
+    def run(self, project, parser):
+        if project not in get_database_names():
+            print "No such project: %s" % project
+            return
+        db = connection[project]
+        if parser not in db.collection_names():
+            print "No data for parser: %s" % parser
+            return
+        db.drop_collection(parser)
+        print "Dropped data for '%s' in project '%s'" % (parser, project)
+
+
 manager = Manager(app)
 manager.add_command('load_data', LoadData())
 manager.add_command('list_parsers', ListParsers())
 manager.add_command('drop_db', DropDB())
+manager.add_command('drop_collection', DropCollection())
 manager.run()
