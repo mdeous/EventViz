@@ -38,7 +38,7 @@
 
 {% block javascript -%}
     {{ super() }}
-    <script type="text/javascript" src="{{ url_for('static', filename="js/timeline-min.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/timeline.js") }}"></script>
     <script type="text/javascript">
         function drawVisualization() {
             var data = {{ data|tojson|safe }};

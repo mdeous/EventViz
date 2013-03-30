@@ -8,8 +8,8 @@
     <meta name="author" content="Mathieu D.">
     <!-- CSS -->
     {% block css -%}
-        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}"/>
-        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap-responsive.min.css") }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.css") }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap-responsive.css") }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename="css/eventviz.css") }}"/>
     {%- endblock %}
     <!-- END CSS -->
@@ -21,8 +21,8 @@
 </div>
 <!-- Javascript -->
 {% block javascript -%}
-    <script type="text/javascript" src="{{ url_for('static', filename="js/jquery-1.9.1.min.js") }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename="js/bootstrap.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/jquery-1.9.1.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/bootstrap.js") }}"></script>
 {%- endblock %}
 <!-- END Javascript -->
 </body>
