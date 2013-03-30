@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from flask.ext.assets import Bundle, Environment
 
 import eventviz
 from eventviz import settings
@@ -18,6 +19,22 @@ app.register_blueprint(search, url_prefix='/search')
 def current_project():
     return {'current_project': eventviz.project}
 
+assets = Environment(app)
+
+js_all = Bundle(
+    'js/jquery-1.9.1.js', 'js/bootstrap.js',
+    filters='jsmin', output='js/eventviz.min.js'
+)
+js_timeline = Bundle('js/timeline.js', filters='jsmin', output='js/timeline.min.js')
+css_all = Bundle(
+    'css/bootstrap.css', 'css/bootstrap-responsive.css', 'css/eventviz.css',
+    filters='cssmin', output='css/eventviz.min.css'
+)
+css_timeline = Bundle('css/timeline.css', filters='cssmin', output='css/timeline.min.css')
+assets.register('js_all', js_all)
+assets.register('js_timeline', js_timeline)
+assets.register('css_all', css_all)
+assets.register('css_timeline', css_timeline)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -35,4 +35,8 @@ nosetests.xml
 .pydevproject
 .idea
 
+# Project files
 prod_settings.py
+.webassets-cache
+*.min.js
+*.min.css
