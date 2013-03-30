@@ -8,7 +8,7 @@
 {% block body -%}
     <div class="row">
         <div class="span12">
-            <form class="form-inline" action="{{ url_for('timeline.project', project=project) }}" method="POST">
+            <form class="form-inline" action="{{ url_for('timeline.index', project=g.current_project) }}" method="POST">
                 <fieldset>
                     <label for="show-fields">Change displayed fields</label>
                     <select name="fields" id="show-fields" multiple="multiple">
@@ -29,7 +29,9 @@
     </div>
     <div class="row">
         <div class="span12">
-            <div id="timeline"></div>
+            <div id="timeline">
+                <noscript>JavaScript is required to display the timeline.</noscript>
+            </div>
         </div>
     </div>
 {%- endblock %}

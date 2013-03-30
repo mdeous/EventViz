@@ -12,13 +12,22 @@
                     <li class="{{ 'active' if page == 'home' else '' }}">
                         <a href="{{ url_for('main.index') }}"><i class="icon-home"></i> Home</a>
                     </li>
-                    <li class="{{ 'active' if page == 'timeline' else '' }}">
-                        <a href="{{ url_for('timeline.index') }}"><i class="icon-eye-open"></i> Timeline</a>
-                    </li>
-                    <li class="{{ 'active' if page == 'search' else '' }}">
-                        <a href="{{ url_for('search.index') }}"><i class="icon-search"></i> Search</a>
-                    </li>
+                    {% if current_project %}
+                        <li class="{{ 'active' if page == 'timeline' else '' }}">
+                            <a href="{{ url_for('timeline.index') }}"><i class="icon-eye-open"></i> Timeline</a>
+                        </li>
+                        <li class="{{ 'active' if page == 'search' else '' }}">
+                            <a href="{{ url_for('search.index') }}"><i class="icon-search"></i> Search</a>
+                        </li>
+                    {% endif %}
                 </ul>
+            {% if current_project %}
+                <ul class="nav pull-right">
+                    <li class="divider-vertical"></li>
+                    <li><a href="#">{{ current_project|replace('_', ' ')|title }}</a></li>
+                    <li class="divider-vertical"></li>
+                </ul>
+            {% endif %}
             </div>
         </div>
     </div>

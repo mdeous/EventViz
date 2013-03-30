@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, request, url_for, redirect
 
+import eventviz
 from eventviz import settings
-from eventviz.db import get_database_names, connection, get_projects_stats, get_fieldnames, get_event_types
+from eventviz.db import connection, get_fieldnames, get_event_types
 
 timeline = Blueprint('timeline', __name__)
 
 
-@timeline.route('/')
+@timeline.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template(
-        'timeline/index.html',
-        page='timeline',
-        stats=get_projects_stats()
-    )
-
-@timeline.route('/<string:project>', methods=['GET', 'POST'])
-def project(project):
-    if project not in get_database_names():
+    project = eventviz.project
+    if project is None:
         # TODO: send flash message
-        return redirect(url_for('timeline.index'))
+        return redirect(url_for('main.index'))
     db = connection[project]
     available_fields = get_fieldnames(project)
     displayed_fields = ['method', 'querystring']
@@ -41,7 +35,7 @@ def project(project):
             }
             data.append(item)
     return render_template(
-        'timeline/project.html',
+        'timeline.html',
         page='timeline',
         project=project,
         event_fields=available_fields,

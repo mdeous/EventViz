@@ -1,26 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from itertools import imap
-
 from flask import Blueprint, render_template, request, redirect, url_for
 
+import eventviz
 from eventviz import settings
-from eventviz.db import get_fieldnames, get_projects_stats, get_exact_matches, get_event_types
+from eventviz.db import get_fieldnames, get_exact_matches, get_event_types
 from eventviz.lib.parsers import get_parser_by_name
 
 search = Blueprint('search', __name__)
 
 
-@search.route('/')
+@search.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template(
-        'search/index.html',
-        page='search',
-        stats=get_projects_stats(),
-    )
-
-@search.route('/<string:project>', methods=['GET', 'POST'])
-def project(project):
+    project = eventviz.project
+    if project is None:
+        # TODO: send flash message
+        return redirect(url_for('main.index'))
     results = []
     result_fields = []
     if request.method == 'POST':
@@ -28,6 +23,7 @@ def project(project):
             if form_field not in request.form:
                 # TODO: send flash message
                 return redirect(url_for('search.project', project=project))
+        # TODO: validate input
         if request.form['search-type'] == 'equal':
             results = get_exact_matches(
                 project,
@@ -40,7 +36,7 @@ def project(project):
                 result['time'] = result['time'].strftime(settings.JS_DATE_FORMAT)
 
     return render_template(
-        'search/project.html',
+        'search.html',
         page='search',
         project=project,
         fields=get_fieldnames(project),
