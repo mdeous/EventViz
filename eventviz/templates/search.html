@@ -45,11 +45,12 @@
     {% if results %}
     <div class="row">
         <div class="span12 search-results">
-            <table class="table table-stripped table-bordered table-hover table-condensed">
+            <table class="table table-stripped table-bordered table-hover table-condensed" id="results">
                 <thead>
                     <tr>
                     {% for result_field in result_fields %}
-                        <th>{{ result_field }}</th>
+{# FIXME: find a way to display headers correctly using CSS #}
+                        <th>{{ result_field }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     {% endfor %}
                     </tr>
                 </thead>
@@ -67,3 +68,12 @@
     </div>
     {% endif %}
 {%- endblock %}
+
+{% block javascript %}
+    {{ super() }}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#results').tablesorter();
+    });
+    </script>
+{% endblock %}

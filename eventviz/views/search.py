@@ -32,8 +32,6 @@ def index():
                 request.form['query']
             )
             result_fields = get_parser_by_name(request.form['search-etype']).fieldnames
-            for result in results:
-                result['time'] = result['time'].strftime(settings.JS_DATE_FORMAT)
 
     return render_template(
         'search.html',

@@ -22,13 +22,13 @@ def current_project():
 assets = Environment(app)
 
 js_all = Bundle(
-    'js/jquery-1.9.1.js', 'js/bootstrap.js',
-    filters='jsmin', output='js/eventviz.min.js'
+    'js/jquery-1.9.1.js', 'js/jquery.tablesorter.js', 'js/bootstrap.js',
+    filters='yui_js', output='js/eventviz.min.js'
 )
 js_timeline = Bundle('js/timeline.js', filters='jsmin', output='js/timeline.min.js')
 css_all = Bundle(
     'css/bootstrap.css', 'css/bootstrap-responsive.css', 'css/eventviz.css',
-    filters='cssmin', output='css/eventviz.min.css'
+    filters='yui_css', output='css/eventviz.min.css'
 )
 css_timeline = Bundle('css/timeline.css', filters='cssmin', output='css/timeline.min.css')
 assets.register('js_all', js_all)
