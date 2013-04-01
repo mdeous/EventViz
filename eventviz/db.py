@@ -2,6 +2,7 @@
 
 import pymongo
 from pymongo.errors import DuplicateKeyError
+from bson.objectid import ObjectId
 
 from eventviz import settings
 from eventviz.lib.parsers import get_parser_by_name
@@ -52,6 +53,13 @@ def get_exact_matches(db_name, coll_name, fieldname, value):
     db = connection[db_name]
     coll = db[coll_name]
     return list(coll.find({fieldname: value}, fields={'_id': False}))
+
+
+@cache()
+def get_item(db_name, coll_name, item_id):
+    db = connection[db_name]
+    coll = db[coll_name]
+    return coll.find_one(ObjectId(item_id))
 
 
 def insert_item(db_name, parser, data):

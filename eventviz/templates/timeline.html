@@ -36,21 +36,14 @@
             </div>
         </div>
     </div>
-    {% for event in events %}
-    <div id="{{ event._id }}" class="modal hide fade" tabindex="-1"
-         role="dialog" aria-labelledby="{{ event._id }}" aria-hidden="true">
+    {% for eid in events %}
+    <div id="{{ eid }}" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="{{ eid }}" aria-hidden="true">
         <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 id="{{ event._id }}">{{ event.time }}</h3>
+            <h3 id="{{ eid }}">Event details</h3>
         </div>
-        <div class="modal-body">
-            <dl class="dl-horizontal">
-            {% for field in event %}
-                <dt>{{ field }}</dt>
-                <dd>{{ event[field] }}</dd>
-            {% endfor %}
-            </dl>
-        </div>
+        <div class="modal-body"></div>
     </div>
     {% endfor %}
 {%- endblock %}
@@ -62,6 +55,7 @@
     {% endassets %}
     <script type="text/javascript">
         var eventIdRegex = /.*([a-f0-9]{24}).*/;
+        var eventTypeRegex = /.*eventtype-(\w+).*/;
         function onEventSelect() {
             var selected = timeline.getSelection();
             console.log(selected);
@@ -72,19 +66,23 @@
                 item['start'] = new Date(Date.parse(item['start']));
             });
             var options = {
-                "cluster": true,
-                "groupsChangeable": false,
-                "showNavigation": true,
-                "axisOnTop": true
+                cluster: true,
+                groupsChangeable: false,
+                showNavigation: true,
+                axisOnTop: true
             };
             var timeline = new links.Timeline(document.getElementById('timeline'));
             timeline.draw(data , options);
         }
         $(document).ready(function() {
             drawVisualization();
-            $('.timeline-event-box').click(function() {
-                var eventID = eventIdRegex.exec($(this).attr('class'))[1];
-                $('#'+eventID).modal();
+            $('.timeline-event-box').dblclick(function() {
+                var eventClassAttr = $(this).attr('class');
+                var eventID = eventIdRegex.exec(eventClassAttr)[1];
+                var eventType = eventTypeRegex.exec(eventClassAttr)[1];
+                var getEventURL = '/timeline/'+eventType+'/'+eventID;
+                $('#'+eventID).modal({remote: getEventURL});
+                return true;
             });
         });
     </script>

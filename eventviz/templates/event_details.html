@@ -1,0 +1,6 @@
+<dl class="dl-horizontal">
+{% for field in event %}
+    <dt>{{ field }}</dt>
+    <dd>{{ event[field] }}</dd>
+{% endfor %}
+</dl>
