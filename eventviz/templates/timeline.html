@@ -36,6 +36,23 @@
             </div>
         </div>
     </div>
+    {% for event in events %}
+    <div id="{{ event._id }}" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="{{ event._id }}" aria-hidden="true">
+        <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="{{ event._id }}">{{ event.time }}</h3>
+        </div>
+        <div class="modal-body">
+            <dl class="dl-horizontal">
+            {% for field in event %}
+                <dt>{{ field }}</dt>
+                <dd>{{ event[field] }}</dd>
+            {% endfor %}
+            </dl>
+        </div>
+    </div>
+    {% endfor %}
 {%- endblock %}
 
 {% block javascript -%}
@@ -44,6 +61,11 @@
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
     <script type="text/javascript">
+        var eventIdRegex = /.*([a-f0-9]{24}).*/;
+        function onEventSelect() {
+            var selected = timeline.getSelection();
+            console.log(selected);
+        }
         function drawVisualization() {
             var data = {{ data|tojson|safe }};
             data.forEach(function(item, index) {
@@ -58,6 +80,12 @@
             var timeline = new links.Timeline(document.getElementById('timeline'));
             timeline.draw(data , options);
         }
-        drawVisualization();
+        $(document).ready(function() {
+            drawVisualization();
+            $('.timeline-event-box').click(function() {
+                var eventID = eventIdRegex.exec($(this).attr('class'))[1];
+                $('#'+eventID).modal();
+            });
+        });
     </script>
 {%- endblock %}
