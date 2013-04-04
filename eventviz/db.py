@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 import pymongo
 from pymongo.errors import DuplicateKeyError
 from bson.objectid import ObjectId
@@ -53,6 +55,25 @@ def get_exact_matches(db_name, coll_name, fieldname, value):
     db = connection[db_name]
     coll = db[coll_name]
     return list(coll.find({fieldname: value}, fields={'_id': False}))
+
+
+def get_containing_matches(db_name, coll_name, fieldname, value):
+    # NOTE: returns a generator, not cachable
+    db = connection[db_name]
+    coll = db[coll_name]
+    for item in coll.find(fields={'_id': False}):
+        if value in item[fieldname]:
+            yield item
+
+
+def get_regex_matches(db_name, coll_name, fieldname, value):
+    # NOTE: returns a generator, not cachable
+    db = connection[db_name]
+    coll = db[coll_name]
+    regex = re.compile(value)
+    for item in coll.find(fields={'_id': False}):
+        if regex.search(item[fieldname]) is not None:
+            yield item
 
 
 @cache()
