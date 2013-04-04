@@ -29,7 +29,6 @@ def index():
     events = []
     for event_type in get_event_types(project):
         for db_item in db[event_type].find():
-            print db_item
             db_item_id = str(db_item['_id'])
             item = {
                 'start': db_item['time'].strftime(settings.JS_DATE_FORMAT),
