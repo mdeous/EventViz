@@ -32,7 +32,6 @@
                         <option value="contains">contains</option>
                         <option value="regex">matches regex</option>
                     </select>
-
                     <br><br>
                     <label for="query"></label>
                     <input type="text" name="query" id="query" placeholder="Search Query" class="span10 search-query" />
@@ -70,11 +69,11 @@
     {% endif %}
 {%- endblock %}
 
-{% block javascript %}
+{% block javascript -%}
     {{ super() }}
     <script type="text/javascript">
     $(document).ready(function() {
         $('#results').tablesorter();
     });
     </script>
-{% endblock %}
+{%- endblock %}
