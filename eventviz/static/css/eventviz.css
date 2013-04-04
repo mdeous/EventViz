@@ -20,6 +20,11 @@ ul.nav-pills>li {
     font-size: 120%;
 }
 
+/* Timeline */
+div.timeline-event-box {
+    cursor: pointer;
+}
+
 /* Results table */
 table#results {
 	font-family:arial,serif;
@@ -40,5 +45,5 @@ table#results thead tr th {
 	padding: 3px;
 }
 table#results thead tr .headerSortDown, table#results thead tr .headerSortUp {
-    background-color: #8dbdd8;
+    background-color: #e6fdff;
 }
