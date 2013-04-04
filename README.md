@@ -10,6 +10,19 @@ make searches on a pre-filtered set of events.
 
 Soon...
 
+## Features
+
+* Group events per project
+* Timeline visualization
+  * Browsable, zoomable
+  * Display any field(s)
+  * Group by any field
+  * Double-click an event to see all its fields
+* Events search
+  * String matching
+  * Substring matching
+  * Regular expression matching
+
 ## Requirements
 
 * Software
