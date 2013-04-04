@@ -1,5 +1,5 @@
 flask==0.9
 flask-script==0.5.3
-pymongo==2.4.2
+pymongo==2.5
 flask-assets==0.8
 yuicompressor==2.4.7
