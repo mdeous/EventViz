@@ -3,8 +3,8 @@
 A web application to display log (or whatever parsable source) events in a timeline. It has a Flask based interface
 and uses MongoDB for storage.
 
-This application is not meant to be used as a log management tool, but more as an utility to provide an easy way
-to visualize and make searches on a pre-filtered set of events of interest.
+This application is not meant to be used as a log management tool, but more as an easy way to visualize and
+make searches on a pre-filtered set of events.
 
 ## Screenshots
 
@@ -12,13 +12,17 @@ Soon...
 
 ## Requirements
 
-* Python 2.x
-* MongoDB
-* PyMongo
-* Flask
-* Flask-Script
+* Software
+  * Python 2.x
+  * MongoDB
+* Python libraries
+  * PyMongo
+  * Flask
+  * Flask-Script
+  * Flask-Assets
+  * YUIcompressor
 
-Required Python modules can be installed using the provided `requirements.txt`.
+Required Python libraries can be installed using the provided `requirements.txt`.
 
     pip install -r requirements.txt
 
@@ -46,6 +50,9 @@ For the remaining configuration variables, just look at the `settings.py` file, 
 * Load some data using the `./manage.py load_data` command
 * Run the integrated server using the `./manage.py runserver` command
 * Connect to http://127.0.0.1:5000 with your web browser
+
+Once you've selected a project, two sections will become available, 'timeline' where you can navigate through events (you can
+see an event's details by double-clicking it), and 'search' where your search results are displayed in a sortable grid.
 
 ### Deployment
 
