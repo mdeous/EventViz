@@ -1,9 +1,6 @@
 var eventIdRegex = /.*([a-f0-9]{24}).*/;
 var eventTypeRegex = /.*eventtype-(\w+).*/;
-function onEventSelect() {
-    var selected = timeline.getSelection();
-    console.log(selected);
-}
+
 function drawVisualization(data) {
     data.forEach(function (item, index) {
         item['start'] = new Date(Date.parse(item['start']));
@@ -15,10 +12,13 @@ function drawVisualization(data) {
         axisOnTop: true
     };
     var timeline = new links.Timeline(document.getElementById('timeline'));
+    links.Timeline.addEventListener(timeline.dom.content, "mousewheel", function() {
+        setDoubleClickHandler();
+    });
     timeline.draw(data, options);
 }
-function initTimeline(eventsData) {
-    drawVisualization(eventsData);
+
+function setDoubleClickHandler() {
     $('.timeline-event-box').dblclick(function () {
         var eventClassAttr = $(this).attr('class');
         var eventID = eventIdRegex.exec(eventClassAttr)[1];
@@ -27,4 +27,9 @@ function initTimeline(eventsData) {
         $('#' + eventID).modal({remote: getEventURL});
         return true;
     });
+}
+
+function initTimeline(eventsData) {
+    drawVisualization(eventsData);
+    setDoubleClickHandler();
 }
