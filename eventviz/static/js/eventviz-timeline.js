@@ -21,6 +21,9 @@ function drawVisualization(data) {
 function setDoubleClickHandler() {
     $('.timeline-event-box').dblclick(function () {
         var eventClassAttr = $(this).attr('class');
+        if (eventClassAttr.indexOf('timeline-event-cluster') >= 0) {
+            return true;
+        }
         var eventID = eventIdRegex.exec(eventClassAttr)[1];
         var eventType = eventTypeRegex.exec(eventClassAttr)[1];
         var getEventURL = '/timeline/' + eventType + '/' + eventID;
