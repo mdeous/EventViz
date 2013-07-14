@@ -2,14 +2,13 @@
 
 import re
 
-from eventviz.lib.parsers.parser import Parser
-
 # LogFormat "%h %l %u %t \"%m /%v%U%q %H\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D %{SESSIONID}C" custom_combined
 # TODO LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
 # TODO LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
 # TODO LogFormat "%h %l %u %t \"%r\" %>s %b" common
 # TODO LogFormat "%{Referer}i -> %U" referer
 # TODO LogFormat "%{User-agent}i" agent
+from lib.parsers import Parser
 
 
 class ApacheAccessParser(Parser):
