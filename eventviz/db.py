@@ -87,10 +87,20 @@ def insert_item(db_name, parser, data):
     if db_name == 'local':
         raise ValueError("Can't insert data into 'local' database")
     collection = connection[db_name][parser.name]
-    for index in parser.indexes:
-        collection.ensure_index([index['name'], pymongo.ASCENDING], unique=index['unique'], drop_dups=index['unique'])
     try:
         collection.insert(data)
     except DuplicateKeyError:
         return False
     return True
+
+
+def setup_indexes():
+    for db in get_database_names():
+        for collection in get_event_types(db):
+            parser = get_parser_by_name(collection)
+            for index in parser.indexes:
+                connection[db][collection].ensure_index(
+                    index['field'],
+                    unique=index['unique'],
+                    drop_dups=index['unique']
+                )
