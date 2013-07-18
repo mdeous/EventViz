@@ -8,10 +8,7 @@ from eventviz import settings
 class Parser(object):
     name = None
     time_fmt = ''
-    base_indexes = [
-        ('raw_log', True),
-    ]
-    extra_indexes = []
+    indexes = [{'field': 'raw_event', 'unique': True}]
     fieldnames = []
 
     def __init__(self, filename):
@@ -19,6 +16,9 @@ class Parser(object):
 
     def __str__(self):
         return '<Parser:%s %s>' % (self.name, self.filename)
+
+    def add_db_index(self, field, unique=False):
+        self.indexes.append({'field': field, 'unique': unique})
 
     def parse(self, line):
         raise NotImplementedError
