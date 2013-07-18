@@ -1,62 +1,28 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from itertools import chain
 
+from eventviz.lib.parsers.base import Parser, RegexParser
 from eventviz.lib.parsers.apache import ApacheAccessParser
-from eventviz import settings
+
+BASE_PARSER_CLASSES = (
+    Parser,
+    RegexParser
+)
+IGNORED_PARSER_NAMES = (
+    'regex',
+)
+PARSER_SUBCLASSES = chain(*[p.__subclasses__() for p in BASE_PARSER_CLASSES])
 
 
 def get_parser_by_name(name):
-    for parser in Parser.__subclasses__():
+    for parser in PARSER_SUBCLASSES:
+        if parser.name in IGNORED_PARSER_NAMES:
+            continue
         if parser.name == name:
             return parser
     return None
 
 
 def get_parser_names():
-    return [parser.name for parser in Parser.__subclasses__()]
-
-
-class Parser(object):
-    name = None
-    time_fmt = ''
-    base_indexes = [
-        ('raw_log', True),
-    ]
-    extra_indexes = []
-    regexes = []
-    fieldnames = []
-
-    def __init__(self, filename):
-        self.filename = filename
-
-    def __str__(self):
-        return '<Parser:%s %s>' % (self.name, self.filename)
-
-    def run(self):
-        with open(self.filename) as inf:
-            for line in inf:
-                line = line.strip()
-                if not line:
-                    continue
-                data = self.pre_parse(line)
-                data = self.parse(data)
-                data = self.normalize(data)
-                data['raw_log'] = line
-                yield data
-
-    def pre_parse(self, line):
-        return line
-
-    def parse(self, line):
-        match = None
-        for regex in self.regexes:
-            match = regex.match(line)
-            if match is not None:
-                return match.groupdict()
-        if settings.DEBUG and (match is None):
-            print'FAILED: %s' % line
-
-    def normalize(self, data):
-        data['time'] = datetime.strptime(data['time'], self.time_fmt)
-        return data
+    return [p.name for p in PARSER_SUBCLASSES if p.name not in IGNORED_PARSER_NAMES]

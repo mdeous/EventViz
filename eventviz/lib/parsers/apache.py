@@ -8,10 +8,10 @@ import re
 # TODO LogFormat "%h %l %u %t \"%r\" %>s %b" common
 # TODO LogFormat "%{Referer}i -> %U" referer
 # TODO LogFormat "%{User-agent}i" agent
-from lib.parsers import Parser
+from eventviz.lib.parsers.base import RegexParser
 
 
-class ApacheAccessParser(Parser):
+class ApacheAccessParser(RegexParser):
     name = 'apache_access'
     time_fmt = '%d/%b/%Y:%H:%M:%S'
     regexes = [
