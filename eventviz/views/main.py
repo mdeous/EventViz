@@ -21,5 +21,6 @@ def index():
     return render_template(
         'index.html',
         page='home',
+        current_prj=eventviz.project,
         stats=stats
     )
