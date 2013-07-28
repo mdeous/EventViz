@@ -12,7 +12,7 @@ BASE_PARSER_CLASSES = (
 IGNORED_PARSER_NAMES = (
     'regex',
 )
-PARSER_SUBCLASSES = chain(*[p.__subclasses__() for p in BASE_PARSER_CLASSES])
+PARSER_SUBCLASSES = list(chain(*[p.__subclasses__() for p in BASE_PARSER_CLASSES]))
 
 
 def get_parser_by_name(name):
