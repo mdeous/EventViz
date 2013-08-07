@@ -56,7 +56,7 @@ class ListParsers(Command):
             print '*', parser_name
 
 
-class DropDB(Command):
+class DropProject(Command):
     """
     Drops database for given project.
     """
@@ -106,7 +106,7 @@ class ListProjects(Command):
 manager = Manager(app)
 manager.add_command('load_data', LoadData())
 manager.add_command('list_parsers', ListParsers())
-manager.add_command('drop_db', DropDB())
+manager.add_command('drop_project', DropProject())
 manager.add_command('drop_collection', DropCollection())
 manager.add_command('list_projects', ListProjects())
 manager.run()
