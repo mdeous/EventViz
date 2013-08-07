@@ -17,15 +17,14 @@ connection = pymongo.MongoClient(settings.MONGO_HOST, settings.MONGO_PORT)
 @cache()
 def get_database_names():
     dbs = connection.database_names()
-    dbs.remove('local')
-    return dbs
+    return [db[9:] for db in dbs if db[:9] == 'eventviz_']
 
 
 @cache()
-def get_event_types(db_name):
-    db = connection[db_name]
+def get_event_types(project_name):
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     event_types = db.collection_names()
-    event_types.remove('system.indexes')
     return event_types
 
 
@@ -33,6 +32,7 @@ def get_event_types(db_name):
 def get_projects_stats():
     stats = {}
     for project in get_database_names():
+        print project
         db = connection[project]
         total_events = sum(db[coll].count() for coll in get_event_types(project))
         stats[project] = total_events
@@ -40,9 +40,10 @@ def get_projects_stats():
 
 
 @cache()
-def get_fieldnames(db_name):
+def get_fieldnames(project_name):
     fieldnames = set()
-    db = connection[db_name]
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     event_types = db.collection_names()
     event_types.remove('system.indexes')
     for event_type in event_types:
@@ -51,24 +52,27 @@ def get_fieldnames(db_name):
 
 
 @cache()
-def get_exact_matches(db_name, coll_name, fieldname, value):
-    db = connection[db_name]
+def get_exact_matches(project_name, coll_name, fieldname, value):
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     coll = db[coll_name]
     return list(coll.find({fieldname: value}, fields={'_id': False}))
 
 
-def get_containing_matches(db_name, coll_name, fieldname, value):
+def get_containing_matches(project_name, coll_name, fieldname, value):
     # NOTE: returns a generator, not cachable
-    db = connection[db_name]
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     coll = db[coll_name]
     for item in coll.find(fields={'_id': False}):
         if value in item[fieldname]:
             yield item
 
 
-def get_regex_matches(db_name, coll_name, fieldname, value):
+def get_regex_matches(project_name, coll_name, fieldname, value):
     # NOTE: returns a generator, not cachable
-    db = connection[db_name]
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     coll = db[coll_name]
     regex = re.compile(value)
     for item in coll.find(fields={'_id': False}):
@@ -77,16 +81,16 @@ def get_regex_matches(db_name, coll_name, fieldname, value):
 
 
 @cache()
-def get_item(db_name, coll_name, item_id):
-    db = connection[db_name]
+def get_item(project_name, coll_name, item_id):
+    project_name = 'eventviz_%s' % project_name
+    db = connection[project_name]
     coll = db[coll_name]
     return coll.find_one(ObjectId(item_id))
 
 
-def insert_item(db_name, parser, data):
-    if db_name == 'local':
-        raise ValueError("Can't insert data into 'local' database")
-    collection = connection[db_name][parser.name]
+def insert_item(project_name, parser, data):
+    project_name = 'eventviz_%s' % project_name
+    collection = connection[project_name][parser.name]
     try:
         collection.insert(data)
     except DuplicateKeyError:
@@ -96,11 +100,12 @@ def insert_item(db_name, parser, data):
 
 def setup_indexes():
     for db in get_database_names():
-        for collection in get_event_types(db):
-            parser = get_parser_by_name(collection)
-            for index in parser.indexes:
-                connection[db][collection].ensure_index(
-                    index['field'],
-                    unique=index['unique'],
-                    drop_dups=index['unique']
-                )
+        if 'eventviz_' in db:
+            for collection in get_event_types(db):
+                parser = get_parser_by_name(collection)
+                for index in parser.indexes:
+                    connection[db][collection].ensure_index(
+                        index['field'],
+                        unique=index['unique'],
+                        drop_dups=index['unique']
+                    )
