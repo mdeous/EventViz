@@ -15,7 +15,7 @@ def index():
     if project is None:
         # TODO: send flash message
         return redirect(url_for('main.index'))
-    db = connection[project]
+    db = connection['eventviz_%s' % project]
     available_fields = get_fieldnames(project)
     displayed_fields = ['method', 'querystring']
     group = None

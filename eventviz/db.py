@@ -17,14 +17,14 @@ connection = pymongo.MongoClient(settings.MONGO_HOST, settings.MONGO_PORT)
 @cache()
 def get_database_names():
     dbs = connection.database_names()
-    return [db[9:] for db in dbs if db[:9] == 'eventviz_']
+    return [db[9:] for db in dbs if 'eventviz_' in db]
 
 
 @cache()
 def get_event_types(project_name):
     project_name = 'eventviz_%s' % project_name
     db = connection[project_name]
-    event_types = db.collection_names()
+    event_types = [et for et in db.collection_names() if et != 'system.indexes']
     return event_types
 
 
@@ -32,8 +32,7 @@ def get_event_types(project_name):
 def get_projects_stats():
     stats = {}
     for project in get_database_names():
-        print project
-        db = connection[project]
+        db = connection['eventviz_%s' % project]
         total_events = sum(db[coll].count() for coll in get_event_types(project))
         stats[project] = total_events
     return stats
