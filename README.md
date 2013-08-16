@@ -8,7 +8,17 @@ make searches on a pre-filtered set of events.
 
 ## Screenshots
 
-Soon...
+### Main View
+
+![Main View](http://img845.imageshack.us/img845/7219/o0au.png "Main View")
+
+### Timeline View
+
+![Timeline View](http://img689.imageshack.us/img689/374/ahew.png "Timeline View")
+
+### Search View
+
+![Search View](http://img534.imageshack.us/img534/3807/7os9.png "Search View")
 
 ## Features
 
