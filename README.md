@@ -14,11 +14,11 @@ make searches on a pre-filtered set of events.
 
 ### Timeline View
 
-![Timeline View](http://img689.imageshack.us/img689/374/ahew.png "Timeline View")
+![Timeline View](http://img22.imageshack.us/img22/5413/akxz.png "Timeline View")
 
 ### Search View
 
-![Search View](http://img534.imageshack.us/img534/3807/7os9.png "Search View")
+![Search View](http://img713.imageshack.us/img713/6708/qtl4.png "Search View")
 
 ## Features
 
