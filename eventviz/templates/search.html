@@ -10,41 +10,53 @@
 {%- endblock %}
 
 {% block body -%}
-    <div class="row">
-        <div class="span12 search-form">
-            <form class="form-inline form-search" action="{{ url_for('search.index', project=project) }}" method="POST">
-                <fieldset>
+    <form class="form-inline form-search" action="{{ url_for('search.index', project=project) }}" method="POST">
+        <fieldset>
+            <div class="row">
+                <div class="col-lg-4">
                     <label for="search-etype"></label>
-                    <select name="search-etype" id="search-etype">
+                    <select class="form-control" name="search-etype" id="search-etype">
                         {% for event_type in event_types %}
                             <option value="{{ event_type }}">{{ event_type }}</option>
                         {% endfor %}
                     </select>
+                </div>
+                <div class="col-lg-4">
                     <label for="search-field"></label>
-                    <select name="search-field" id="search-field">
+                    <select class="form-control" name="search-field" id="search-field">
                         {% for field in fields %}
                             <option value="{{ field }}">{{ field }}</option>
                         {% endfor %}
                     </select>
+                </div>
+                <div class="col-lg-4">
                     <label for="search-type"></label>
-                    <select name="search-type" id="search-type">
+                    <select class="form-control" name="search-type" id="search-type">
                         <option value="equals">equals</option>
                         <option value="contains">contains</option>
                         <option value="regex">matches regex</option>
                     </select>
-                    <br><br>
+                </div>
+                <br><br>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <label for="query"></label>
-                    <input type="text" name="query" id="query" placeholder="Search Query" class="span10 search-query" />
+                    <input type="text" name="query" id="query" placeholder="Search Query" class="form-control" />
                     <br><br>
-                    <button class="btn btn-primary btn-medium" type="submit">Search!</button>
-                </fieldset>
-            </form>
-            <hr>
-        </div>
-    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5" style="position: relative; left: 3%;">
+                    <button class="btn btn-primary btn-lg" type="submit">Search!</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <hr>
     {% if results %}
     <div class="row">
-        <div class="span12 search-results">
+        <div class="col-lg-12 search-results">
             <table class="table table-stripped table-bordered table-hover table-condensed" id="results">
                 <thead>
                     <tr>

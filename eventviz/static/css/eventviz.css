@@ -7,11 +7,11 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
-
-/* Navigation bar */
-div.hero-unit>h1, a.brand {
+.eventviz {
     font-family: 'brankovic',sans-serif;
 }
+
+/* Navigation bar */
 ul.nav-pills>li {
     background: #e8f6ff;
     border-radius: 5px;
@@ -25,7 +25,10 @@ div.timeline-event-box {
     cursor: pointer;
 }
 
-/* Results table */
+/* Search */
+input.search-query {
+    text-align: center;
+}
 table#results {
 	font-family:arial,serif;
     font-size: 9pt;

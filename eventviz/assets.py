@@ -13,7 +13,6 @@ JS_TIMELINE_ASSETS = [
 ]
 CSS_ASSETS = [
     'css/bootstrap.css',
-    'css/bootstrap-responsive.css',
     'css/eventviz.css'
 ]
 CSS_TIMELINE_ASSETS = [
