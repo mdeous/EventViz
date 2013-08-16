@@ -22,7 +22,7 @@ class LoadData(Command):
         Option('-P', '--project', dest='project_name', required=True)
     )
 
-    def run(self, filename, parser_name, project_name):
+    def run(self, filename=None, parser_name=None, project_name=None):
         parser_cls = get_parser_by_name(parser_name)
         if parser_cls is None:
             print "Unknown parser: %s" % parser_name
@@ -64,7 +64,7 @@ class DropProject(Command):
         Option('-P', '--project', dest='project', required=True),
     )
 
-    def run(self, project):
+    def run(self, project=None):
         if project not in get_database_names():
             print "No such project: %s" % project
             return
@@ -81,7 +81,7 @@ class DropCollection(Command):
         Option('-p', '--parser', dest='parser', required=True)
     )
 
-    def run(self, project, parser):
+    def run(self, project=None, parser=None):
         if project not in get_database_names():
             print "No such project: %s" % project
             return
@@ -103,10 +103,33 @@ class ListProjects(Command):
             print '*', db_name
 
 
+class TestParser(Command):
+    """
+    Tests a parser (for debugging purpose only).
+    """
+    option_list = (
+        Option('-p', '--parser', dest='parser', required=True),
+        Option('-i', '--inputfile', dest='inputfile', required=True)
+    )
+
+    def run(self, parser=None, inputfile=None):
+        settings.DEBUG = True
+        parser_cls = get_parser_by_name(parser)
+        if parser_cls is None:
+            print "Unknown parser: %s" % parser
+            return
+        if not os.path.exists(inputfile):
+            print "File not found: %s" % inputfile
+            return
+        parser = parser_cls(inputfile)
+        for _ in parser.run():
+            pass
+
 manager = Manager(app)
 manager.add_command('load_data', LoadData())
 manager.add_command('list_parsers', ListParsers())
 manager.add_command('drop_project', DropProject())
 manager.add_command('drop_collection', DropCollection())
 manager.add_command('list_projects', ListProjects())
+manager.add_command('test_parser', TestParser())
 manager.run()

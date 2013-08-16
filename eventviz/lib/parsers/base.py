@@ -35,7 +35,13 @@ class Parser(object):
                     continue
                 data = self.parse(line)
                 if data is None:
+                    if settings.DEBUG:
+                        print'FAILED: %s' % line
                     continue
+                else:
+                    if settings.DEBUG:
+                        from pprint import pprint
+                        pprint(data)
                 data = self.normalize(data)
                 data['raw_log'] = line
                 yield data
@@ -51,5 +57,3 @@ class RegexParser(Parser):
             match = regex.match(line)
             if match is not None:
                 return match.groupdict()
-        if settings.DEBUG and (match is None):
-            print'FAILED: %s' % line
