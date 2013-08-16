@@ -18,6 +18,7 @@ def index():
             # TODO: send flash message
             return redirect(url_for('main.index'))
         eventviz.project = project
+        return redirect(url_for('timeline.index'))
     return render_template(
         'index.html',
         page='home',
