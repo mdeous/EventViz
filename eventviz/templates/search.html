@@ -20,7 +20,7 @@
                             <option value="{{ event_type }}">{{ event_type }}</option>
                         {% endfor %}
                     </select>
-                </div>
+                </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                     <label for="search-field"></label>
                     <select class="form-control" name="search-field" id="search-field">
@@ -28,7 +28,7 @@
                             <option value="{{ field }}">{{ field }}</option>
                         {% endfor %}
                     </select>
-                </div>
+                </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                     <label for="search-type"></label>
                     <select class="form-control" name="search-type" id="search-type">
@@ -36,9 +36,9 @@
                         <option value="contains">contains</option>
                         <option value="regex">matches regex</option>
                     </select>
-                </div>
+                </div><!-- /.col-lg-4 -->
                 <br><br>
-            </div>
+            </div><!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <label for="query"></label>
@@ -49,8 +49,8 @@
             <div class="row">
                 <div class="col-lg-2 col-lg-offset-5" style="position: relative; left: 3%;">
                     <button class="btn btn-primary btn-lg" type="submit">Search!</button>
-                </div>
-            </div>
+                </div><!-- /.col-lg2.col-lg-offset-5 -->
+            </div><!-- /.row -->
         </fieldset>
     </form>
     <hr>
@@ -76,8 +76,8 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-    </div>
+        </div><!-- /.col-lg-12.search-results -->
+    </div><!-- /.row -->
     {% endif %}
 {%- endblock %}
 

@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand eventviz" href="{{ url_for('main.index') }}">EventViz</a>
-            </div>
+            </div><!-- /.navbar-header -->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="{{ 'active' if page == 'home' else '' }}">
@@ -30,7 +30,7 @@
 {#                    <li class="nav-divider"></li>#}
                 </ul>
             {% endif %}
-            </div>
-        </div>
-    </div>
+            </div><!-- /.navbar-collapse.collapse -->
+        </div><!-- /.container -->
+    </div><!-- /.navbar-inner -->
 </nav>
