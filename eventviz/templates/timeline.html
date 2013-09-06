@@ -45,20 +45,7 @@
         </div>
     </div>
     {% for eid in events %}
-    <div id="{{ eid }}"
-         class="modal fade"
-         tabindex="-1"
-         role="dialog"
-         aria-hidden="true"
-         aria-labelledby="event-{{ eid }}">
-        <div class="modal-dialog"><div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="{{ eid }}">Event details</h3>
-            </div>
-            <div class="modal-body"></div>
-        </div></div>
-    </div>
+        <div class="modal fade" id="{{ eid }}" tabindex="-1" role="dialog" aria-hidden="true"></div>
     {% endfor %}
 {%- endblock %}
 
