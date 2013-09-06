@@ -16,6 +16,10 @@ make searches on a pre-filtered set of events.
 
 ![Timeline View](http://img22.imageshack.us/img22/5413/akxz.png "Timeline View")
 
+### Timeline Event Details
+
+![Timeline Event Details](http://img560.imageshack.us/img560/2237/g7gp.png "Timeline Event Details")
+
 ### Search View
 
 ![Search View](http://img713.imageshack.us/img713/6708/qtl4.png "Search View")
