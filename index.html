@@ -34,23 +34,31 @@ and uses MongoDB for storage.</p>
 <p>This application is not meant to be used as a log management tool, but more as an easy way to visualize and
 make searches on a pre-filtered set of events.</p>
 
-<h1>
-<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a> Screenshots</h1>
+<h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a> Screenshots</h2>
 
-<p>Main View</p>
+<h3>
+<a name="main-view" class="anchor" href="#main-view"><span class="octicon octicon-link"></span></a> Main View</h3>
 
 <p><img src="http://img845.imageshack.us/img845/7219/o0au.png" alt="Main View" title="Main View"></p>
 
-<p>Timeline View</p>
+<h3>
+<a name="timeline-view" class="anchor" href="#timeline-view"><span class="octicon octicon-link"></span></a>Timeline View</h3>
 
 <p><img src="http://img22.imageshack.us/img22/5413/akxz.png" alt="Timeline View" title="Timeline View"></p>
 
-<p>Search View</p>
+<h3>
+<a name="timeline-event-details" class="anchor" href="#timeline-event-details"><span class="octicon octicon-link"></span></a>Timeline Event Details</h3>
+
+<p><img src="http://img560.imageshack.us/img560/2237/g7gp.png" alt="Timeline Event Details" title="Timeline Event Details"></p>
+
+<h3>
+<a name="search-view" class="anchor" href="#search-view"><span class="octicon octicon-link"></span></a>Search View</h3>
 
 <p><img src="http://img713.imageshack.us/img713/6708/qtl4.png" alt="Search View" title="Search View"></p>
 
-<h1>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h1>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
 <li>Group events per project</li>
@@ -71,8 +79,8 @@ make searches on a pre-filtered set of events.</p>
 <li>Regular expression matching</li>
 </ul>
 </li>
-</ul><h1>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h1>
+</ul><h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>Software
@@ -97,15 +105,15 @@ make searches on a pre-filtered set of events.</p>
 <pre><code>pip install -r requirements.txt
 </code></pre>
 
-<h1>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>All the administration commands are implemented in the <code>manage.py</code> script. Commands switches meaning can
 be viewed using <code>./manage.py &lt;command&gt; -h</code>, and available commands can be listed by calling the script
 without any argument.</p>
 
-<h2>
-<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+<h3>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
 
 <p>Default configuration variables are stored in the <code>settings.py</code> file. To prevent making changes to a versioned file,
 you should create a <code>prod_settings.py</code> file where you'd override the options you want, it will be automatically loaded.</p>
@@ -120,8 +128,8 @@ in the application's context. You really don't want that in a production environ
 <code>SECRET_KEY</code>: The key used to sign cookies. Set this to a very long random value.</li>
 </ul><p>For the remaining configuration variables, just look at the <code>settings.py</code> file, it should be self-explanatory.</p>
 
-<h2>
-<a name="workflow" class="anchor" href="#workflow"><span class="octicon octicon-link"></span></a>Workflow</h2>
+<h3>
+<a name="workflow" class="anchor" href="#workflow"><span class="octicon octicon-link"></span></a>Workflow</h3>
 
 <ul>
 <li>Load some data using the <code>./manage.py load_data</code> command</li>
@@ -130,14 +138,14 @@ in the application's context. You really don't want that in a production environ
 </ul><p>Once you've selected a project, two sections will become available, 'timeline' where you can navigate through events (you can
 see an event's details by double-clicking it), and 'search' where your search results are displayed in a sortable grid.</p>
 
-<h2>
-<a name="deployment" class="anchor" href="#deployment"><span class="octicon octicon-link"></span></a>Deployment</h2>
+<h3>
+<a name="deployment" class="anchor" href="#deployment"><span class="octicon octicon-link"></span></a>Deployment</h3>
 
 <p>To serve the application using something else than the integrated server (Apache, nginx, ...), please refer to
 the related <a href="http://flask.pocoo.org/docs/deploying/">Flask documentation</a>.</p>
 
-<h1>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>See the <a href="https://github.com/mattoufoutu/EventViz/wiki">Wiki</a></p>
       </section>
