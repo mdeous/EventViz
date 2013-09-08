@@ -11,6 +11,11 @@ body {
     font-family: 'brankovic',sans-serif;
 }
 
+.centered {
+    text-align: center;
+    vertical-align: middle;
+}
+
 /* Navigation bar */
 ul.nav-pills>li {
     background: #e8f6ff;
