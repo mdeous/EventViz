@@ -25,14 +25,14 @@ CSS_MINIFIER = 'yui_css'
 def setup_assets(app):
     assets = Environment(app)
 
-    js_all = Bundle(*JS_ASSETS, filters=JS_MINIFIER, output='js/eventviz.min.js')
+    js_all = Bundle(*JS_ASSETS, filters=JS_MINIFIER, output='js/eventviz-bundle.min.js')
     assets.register('js_all', js_all)
 
-    js_timeline = Bundle(*JS_TIMELINE_ASSETS, filters=JS_MINIFIER, output='js/timeline.min.js')
+    js_timeline = Bundle(*JS_TIMELINE_ASSETS, filters=JS_MINIFIER, output='js/timeline-bundle.min.js')
     assets.register('js_timeline', js_timeline)
 
-    css_all = Bundle(*CSS_ASSETS, filters=CSS_MINIFIER, output='css/eventviz.min.css')
+    css_all = Bundle(*CSS_ASSETS, filters=CSS_MINIFIER, output='css/eventviz-bundle.min.css')
     assets.register('css_all', css_all)
 
-    css_timeline = Bundle(*CSS_TIMELINE_ASSETS, filters=CSS_MINIFIER, output='css/timeline.min.css')
+    css_timeline = Bundle(*CSS_TIMELINE_ASSETS, filters=CSS_MINIFIER, output='css/timeline-bundle.min.css')
     assets.register('css_timeline', css_timeline)
