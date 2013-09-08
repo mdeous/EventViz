@@ -1,14 +1,5 @@
 {% extends 'base.html' %}
 
-{% block css -%}
-    {{ super() }}
-    <style type="text/css">
-    div.search-form {
-        text-align: center;
-    }
-    </style>
-{%- endblock %}
-
 {% block body -%}
     <form class="form-inline form-search" action="{{ url_for('search.index', project=project) }}" method="POST">
         <fieldset>
@@ -44,8 +35,8 @@
                     <label for="query"></label>
                     <input type="text" name="query" id="query" placeholder="Search Query" class="form-control" />
                     <br><br>
-                </div>
-            </div>
+                </div><!-- /.col-lg-12 -->
+            </div><!-- /.row -->
             <div class="row">
                 <div class="col-lg-2 col-lg-offset-5" style="position: relative; left: 3%;">
                     <button class="btn btn-primary btn-lg" type="submit">Search!</button>
@@ -54,6 +45,11 @@
         </fieldset>
     </form>
     <hr>
+    {% if filters %}
+    <div class="alert alert-info centered">
+        {{ filters.event_type }} {{ filters.field }} {{ filters.search_type }} {{ filters.query }}
+    </div><!-- /.alert.alert-info.centered -->
+    {% endif %}
     {% if results %}
     <div class="row">
         <div class="col-lg-12 search-results">

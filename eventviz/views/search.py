@@ -22,6 +22,7 @@ def index():
         return redirect(url_for('main.index'))
     results = []
     result_fields = []
+    filters = None
     if request.method == 'POST':
         for form_field in ('search-field', 'search-type', 'search-etype', 'query'):
             if form_field not in request.form:
@@ -38,6 +39,12 @@ def index():
             request.form['query']
         )
         result_fields = get_parser_by_name(request.form['search-etype']).fieldnames
+        filters = {
+            'event_type': request.form['search-etype'],
+            'field': request.form['search-field'],
+            'search_type': request.form['search-type'],
+            'query': request.form['query']
+        }
 
     return render_template(
         'search.html',
@@ -46,5 +53,6 @@ def index():
         fields=get_fieldnames(project),
         event_types=get_event_types(project),
         results=results,
-        result_fields=result_fields
+        result_fields=result_fields,
+        filters=filters
     )
