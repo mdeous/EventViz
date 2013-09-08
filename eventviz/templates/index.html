@@ -7,7 +7,11 @@
     <ul>
     {% for project in stats %}
         {% if project != '__total_events' %}
-            <li><a href="{{ url_for('main.index', project=project) }}">{% if project == current_prj %}&rarr; {% endif %}{{ project|title|replace('_', ' ') }}</a>: <small>{{ stats[project] }} events</small></li>
+            {% if project == current_prj %}
+                <li>&rarr; {{ project }}: <small>{{ stats[project] }} events</small></li>
+            {% else %}
+                <li><a href="{{ url_for('main.index', project=project) }}">{{ project }}</a>: <small>{{ stats[project] }} events</small></li>
+            {% endif %}
         {% endif %}
     {% endfor %}
     </ul>
